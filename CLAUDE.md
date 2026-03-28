@@ -42,15 +42,26 @@ You are responsible for monitoring context bloat and flagging it proactively.
 - You catch yourself re-reading a file already in context
 - I ask you to do something you already did earlier in the session (drift signal)
 
-### Soft triggers — suggest `/compact` when:
+### Soft triggers — **always prompt at the end of your response** when:
 - A commit is made (natural session boundary)
-- A feature or fix is fully complete and tested
+- A distinct feature, fix, or deliverable is fully complete
 - The task is switching topic (e.g., implementation → review → new feature)
+
+Do not wait to be asked. End your response with the prompt — don't bury it.
+
+### `/compact` vs `/clear` — recommend the right one:
+- **`/compact`** — same task continues, session is just getting long; compresses history,
+  keeps context
+- **`/clear`** — task is fully done, switching to an unrelated task, or session has
+  drifted; wipes context entirely
 
 ### How to warn:
 Prepend your response with:
 > ⚠️ **Context check:** [specific reason, e.g. "16 files read"]. Run `/compact` before
 > continuing, or `/clear` if switching to a new task.
+
+And end your response with the explicit prompt, e.g.:
+> 👉 Good stopping point — run `/compact` before continuing, or `/clear` if done for now.
 
 ### Subagent routing
 Protect the main context window by delegating to subagents when:
@@ -62,4 +73,4 @@ Protect the main context window by delegating to subagents when:
 - Vague requests like "improve this" or "look through the codebase" — push back and ask
   to scope it
 - Reaching for a full pipeline/test run inline — suggest a background subagent instead
-- No `/compact` after completing a distinct feature or after a commit
+- Completing a distinct deliverable without prompting `/compact` or `/clear`
