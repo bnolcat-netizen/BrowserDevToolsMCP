@@ -1,5 +1,13 @@
 # Claude Code Instructions
 
+## Setup Checklist
+Complete these steps when first cloning this template:
+
+1. In `CLAUDE.md`, replace `[SPEC_FILE]` with the name of your spec/build plan file
+2. In `PROGRESS.md`, replace `[Project Name]`, `[DATE]`, and `[SPEC_FILE]`
+3. In `README.md`, replace `[Project Name]` and the description placeholder
+4. Delete this Setup Checklist section when done
+
 ## Constraints
 - Ask before creating any new files not established in the project spec
 - Ask before installing any new packages
@@ -10,67 +18,23 @@
 - See PROGRESS.md for current state (if present)
 - See [SPEC_FILE] for full project spec
 
+## Documentation Maintenance
+- Update `README.md` whenever a feature is completed, a setup step changes, or a new usage pattern is introduced
+- README sections should reflect what the project can do *today*, not what is planned
+- At the end of each phase, confirm README accurately describes setup, usage, and architecture before moving on
+
 ## File Reading Priority
 Start each session by reading the primary context file (e.g. PROGRESS.md) only. Consult
 other files only when you need specific implementation details. Do not ingest the full
 codebase on every session start.
 
-## Model Routing
+<!-- Model Routing and Session Health are defined in ~/.claude/CLAUDE.md -->
 
-**At the start of every non-trivial task, state which tier fits and include the switch
-command — before doing any work.** Do not wait to be asked.
+## CLAUDE.md Maintenance
 
-| Tier | Use for | Switch |
-|------|---------|--------|
-| **Haiku** | File reads, summaries, simple edits, one-off scripts, checking git status | `/model claude-haiku-4-5-20251001` |
-| **Sonnet** | Pipeline logic, debugging, moderate refactors, most feature work, committing | `/model claude-sonnet-4-6` |
-| **Opus** | Architecture decisions, complex prompt engineering, major redesigns, cross-file overhauls | `/model claude-opus-4-6` |
+Universal instructions (Model Routing, Session Health) live in `~/.claude/CLAUDE.md` and
+apply to all projects automatically — do not duplicate them here.
 
-Format: "Recommended: **Haiku** — `/model claude-haiku-4-5-20251001`" then wait for
-confirmation before proceeding if switching would save meaningful cost.
-
-If unsure which model strings are available, run `/model` first.
-
-## Session Health & Context Management
-
-You are responsible for monitoring context bloat and flagging it proactively.
-
-### Hard thresholds — warn immediately when:
-- **15+ distinct files** read in this session
-- **25+ tool calls** made in this session
-- A single tool call returns **500+ lines** of output
-- You catch yourself re-reading a file already in context
-- I ask you to do something you already did earlier in the session (drift signal)
-
-### Soft triggers — **always prompt at the end of your response** when:
-- A commit is made (natural session boundary)
-- A distinct feature, fix, or deliverable is fully complete
-- The task is switching topic (e.g., implementation → review → new feature)
-
-Do not wait to be asked. End your response with the prompt — don't bury it.
-
-### `/compact` vs `/clear` — recommend the right one:
-- **`/compact`** — same task continues, session is just getting long; compresses history,
-  keeps context
-- **`/clear`** — task is fully done, switching to an unrelated task, or session has
-  drifted; wipes context entirely
-
-### How to warn:
-Prepend your response with:
-> ⚠️ **Context check:** [specific reason, e.g. "16 files read"]. Run `/compact` before
-> continuing, or `/clear` if switching to a new task.
-
-And end your response with the explicit prompt, e.g.:
-> 👉 Good stopping point — run `/compact` before continuing, or `/clear` if done for now.
-
-### Subagent routing
-Protect the main context window by delegating to subagents when:
-- Exploring unfamiliar parts of the codebase (5+ files to read)
-- Running scripts or tests whose output you don't need inline
-- Fetching or summarizing external documentation
-
-### Anti-patterns to call out:
-- Vague requests like "improve this" or "look through the codebase" — push back and ask
-  to scope it
-- Reaching for a full pipeline/test run inline — suggest a background subagent instead
-- Completing a distinct deliverable without prompting `/compact` or `/clear`
+This file should only contain project-specific sections: Setup Checklist, Constraints,
+Context, Documentation Maintenance, File Reading Priority. When improving shared
+instructions, edit `~/.claude/CLAUDE.md` only.
