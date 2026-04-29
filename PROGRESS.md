@@ -1,6 +1,6 @@
 # BrowserDevToolsMCP -- Progress Tracker
 
-*Updated: 2026-04-29. Used to orient Claude Code at session start.*
+*Updated: 2026-04-29 (Phase 1 complete). Used to orient Claude Code at session start.*
 
 > **Spec:** See BUILD_PLAN.md for full build plan.
 
@@ -11,26 +11,25 @@
 ### Housekeeping
 - Template placeholders filled in (CLAUDE.md, PROGRESS.md, README.md)
 
+### Phase 1 — Project scaffold and core infrastructure
+- `package.json` + `tsconfig.json` + `.gitignore`
+- `src/buffers.ts` — ring buffer (newest-first, configurable via `CDP_BUFFER_SIZE`)
+- `src/cdp-client.ts` — CDP connection singleton, event wiring for console/WS
+- `src/index.ts` — MCP server entry point, all 7 tools registered
+- `src/tools/` — all 7 tool handlers implemented
+- Build verified: `tsc` compiles clean, server starts up
+
 ---
 
 ## What's Next
 
-### Phase 1 -- Project scaffold and core infrastructure
+### Phase 2 — Live testing against a real browser
 
-#### To build next
-- `package.json` + `tsconfig.json`
-- `src/buffers.ts` — ring buffer for console logs and WS frames
-- `src/cdp-client.ts` — CDP connection lifecycle, target selection
-- `src/index.ts` — MCP server entry point, tool registration
-
-#### Then (Phase 2 -- Tools)
-- `src/tools/list-targets.ts`
-- `src/tools/connect.ts`
-- `src/tools/evaluate.ts`
-- `src/tools/console-logs.ts`
-- `src/tools/ws-frames.ts`
-- `src/tools/event-listeners.ts`
-- `src/tools/clear-buffers.ts`
+#### To do next
+- Register in a project's `.claude/settings.json` as `browser-devtools` MCP server
+- Run `/mcp` in Claude Code to load the tools
+- Connect to a real browser tab and exercise each tool
+- Fix any issues found during live testing
 
 #### Deferred
 - None
