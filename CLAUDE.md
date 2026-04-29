@@ -1,13 +1,5 @@
 # Claude Code Instructions
 
-## Setup Checklist
-Complete these steps when first cloning this template:
-
-1. In `CLAUDE.md`, replace `[SPEC_FILE]` with the name of your spec/build plan file
-2. In `PROGRESS.md`, replace `[Project Name]`, `[DATE]`, and `[SPEC_FILE]`
-3. In `README.md`, replace `[Project Name]` and the description placeholder
-4. Delete this Setup Checklist section when done
-
 ## Constraints
 - Ask before creating any new files not established in the project spec
 - Ask before installing any new packages
@@ -16,7 +8,7 @@ Complete these steps when first cloning this template:
 
 ## Context
 - See PROGRESS.md for current state (if present)
-- See [SPEC_FILE] for full project spec
+- See BUILD_PLAN.md for full project spec
 
 ## Documentation Maintenance
 - Update `README.md` whenever a feature is completed, a setup step changes, or a new usage pattern is introduced

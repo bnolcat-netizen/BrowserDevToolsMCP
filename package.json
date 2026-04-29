@@ -1,0 +1,19 @@
+{
+  "name": "browser-devtools-mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing Chrome DevTools Protocol as Claude Code tools",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "chrome-remote-interface": "^0.33.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/chrome-remote-interface": "^0.31.0"
+  }
+}
